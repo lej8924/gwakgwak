@@ -6,7 +6,7 @@ module.exports = {
   "port": 3306,
   "username": "root",
   "password": "lej1234",
-  "database": "mysql_db",
+  "database": "GoWebDB",
   "synchronize": true,
   "logging": false,
   "entities": [

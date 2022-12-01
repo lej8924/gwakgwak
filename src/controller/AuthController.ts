@@ -47,7 +47,7 @@ export class AuthController {
       return res.status(400).send({ message: "User Not found." });
     }
 
-    // roels 설정
+    // roles 설정
     user.roles = [];
 
     if (roles && roles.length > 0) {

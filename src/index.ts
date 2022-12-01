@@ -66,6 +66,7 @@ app.post('/hello6', (req, res) => {
 app.use('/api', router);
 
 createConnection().then(connection => {
+  console.log("DB CONNNECTION!")
   app.listen(8080, () => {
     console.log('server is listening 8080');
   });

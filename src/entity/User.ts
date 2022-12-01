@@ -10,6 +10,7 @@ import {
 import {Comment} from './Comment';
 import {Role} from "./Role";
 import {Board} from "./Board";
+import { Game_log } from "./Game_log";
 
 @Entity()
 @Unique(['email'])
@@ -25,6 +26,12 @@ export class User {
 
   @Column({length: 255})
   username: string;
+
+  @Column({length: 255})
+  nickname: string;
+
+  @Column({type:"int"})
+  best_score:number;
 
   @CreateDateColumn()
   created: Date;
@@ -45,4 +52,7 @@ export class User {
 
   @OneToMany(type => Comment, comment => comment.user)
   comments: Comment[];
+
+  @OneToMany(type => Game_log, game_log=>game_log.user)
+  game_logs: Game_log[];
 }
