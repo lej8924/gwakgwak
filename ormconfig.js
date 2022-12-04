@@ -7,7 +7,7 @@ module.exports = {
   "username": "root",
   "password": "lej1234",
   "database": "GoWebDB",
-  "synchronize": true,
+  "synchronize": false,
   "logging": false,
   "entities": [
     "src/entity/**/*.ts"

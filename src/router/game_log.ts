@@ -5,6 +5,6 @@ import { GameController } from "../controller/GameController";
 const routes = Router();
 //log upload
 //routes.post('',AuthMiddleware.verifyToken,GameController.addLog);
-routes.get('/list', GameController.findMyLogs,GameController.findBestlog);
+routes.get('/:id',AuthMiddleware.verifyToken, GameController.findMyLogs);
 
 export default routes;

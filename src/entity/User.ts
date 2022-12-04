@@ -30,14 +30,12 @@ export class User {
   @Column({length: 255})
   nickname: string;
 
-  @Column({type:"int"})
-  best_score:number;
-
   @CreateDateColumn()
   created: Date;
 
   @UpdateDateColumn()
   updated: Date;
+
 
   @ManyToMany(() => Role, role => role.users)
   @JoinTable({
@@ -53,6 +51,6 @@ export class User {
   @OneToMany(type => Comment, comment => comment.user)
   comments: Comment[];
 
-  @OneToMany(type => Game_log, game_log=>game_log.user)
+  @OneToMany(type => Game_log, game_log => game_log.user)
   game_logs: Game_log[];
 }

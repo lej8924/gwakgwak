@@ -19,7 +19,7 @@ routes.use('/comment', comment);
 
 routes.use('/auth', auth);
 
-routes.use('/game_log', game_log);
+routes.use('/gameLog', game_log);
 
 routes.use('/game', game);
 

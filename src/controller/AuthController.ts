@@ -32,12 +32,13 @@ export class AuthController {
   }
 
   static signUp = async (req, res) => {
-    const {email, password, username, roles} = req.body;
+    const {email, password, username, roles, nickname} = req.body;
 
     const user = new User();
     user.email = email;
     user.password = hashSync(password, 8);
     user.username = username;
+    user.nickname = nickname;
 
     // 이메일 중복 체크
     const existUser = await getConnection().getRepository(User)
