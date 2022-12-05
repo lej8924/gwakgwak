@@ -16,15 +16,16 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-app.use("/api",express.static(__dirname + '/public'));
+// app.use("/api",express.static(__dirname + '/public'));
+app.use("",express.static(__dirname + '/public'));
 // app.engine('html', require('ejs').renderFile)
 app.set('views', __dirname + '/views');
 app.set("view engine", "ejs");
 // app.use(express.static(__dirname+"/public"));
 
 // GET만 허용
-app.get('/game55', (req, res) => {
-  res.render("game.ejs");
+app.get('/header', (req, res) => {
+  res.render("header.ejs");
   // res.render(__dirname + '/views/game.html');
   //res.send("<h1>은재 바보</h1>");
 })

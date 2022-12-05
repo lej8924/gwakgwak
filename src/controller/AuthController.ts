@@ -28,7 +28,7 @@ export class AuthController {
       expiresIn: process.env.expirationSecondMs
     });
 
-    res.send({jwt: token});
+    res.redirect("/",token);
   }
 
   static signUp = async (req, res, next) => {

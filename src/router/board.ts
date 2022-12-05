@@ -3,6 +3,10 @@ import {BoardController} from "../controller/BoardController";
 import {AuthMiddleware} from "../middleware/AuthMiddleware";
 
 const routes = Router();
+routes.get('',function(req,res,next){
+    res.render("board.ejs");
+})
+
 routes.post('', AuthMiddleware.verifyToken, BoardController.addBoard);
 routes.get('/list',  BoardController.findAllBoard);
 routes.get('/count', BoardController.countBoard);
