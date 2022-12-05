@@ -6,7 +6,7 @@ import {Role} from "../entity/Role";
 import jwt from 'jsonwebtoken';
 
 export class AuthController {
-  static signIn = async (req, res) => {
+  static signIn = async (req, res, next) => {
     const {email, password} = req.body;
 
     const user = await getConnection().getRepository(User)
@@ -31,7 +31,7 @@ export class AuthController {
     res.send({jwt: token});
   }
 
-  static signUp = async (req, res) => {
+  static signUp = async (req, res, next) => {
     const {email, password, username, roles, nickname} = req.body;
 
     const user = new User();
@@ -65,8 +65,9 @@ export class AuthController {
       user.roles = res;
     }
 
-    const result = await getConnection().getRepository(User).save(user);
+    const result = await getConnection().getRepository(User).save(user).then(result=> res.redirect("/api/auth/signup"));
 
     res.send(result);
+    
   }
 }
