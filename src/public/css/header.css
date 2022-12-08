@@ -185,6 +185,7 @@ section
 {
 	width: 100%;
 	overflow: hidden;
+	height: auto;
 }
 .prlx_parent
 {
@@ -1293,6 +1294,7 @@ select option
 	}
 	.logo_container, .wishlist_cart
 	{
+		margin-left: 50px;
 		height: 72px;
 	}
 	.logo a

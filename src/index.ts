@@ -16,8 +16,8 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-// app.use("/api",express.static(__dirname + '/public'));
-app.use("",express.static(__dirname + '/public'));
+app.use("/api",express.static(__dirname + '/public'));
+// app.use("",express.static(__dirname + '/public'));
 // app.engine('html', require('ejs').renderFile)
 app.set('views', __dirname + '/views');
 app.set("view engine", "ejs");

@@ -39,8 +39,13 @@ const holes = document.querySelectorAll('.hole');
     timeUp = false;
     peep();
 
-    setTimeout(function(){timeUp = true; window.location.href='http://localhost:8080/api/game'}, 10000);
+    setTimeout(function(){timeUp = true; window.location.reload(true);}, 10000);
   }
+
+   function retryGame(){   
+    timeUp = true;
+    window.location.reload(true);
+   }
 
   function bonk(e) {
     if (!e.isTrusted) return;   // isTrusted is a property that tells whether mouse event is fake or not
