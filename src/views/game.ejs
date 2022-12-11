@@ -45,3 +45,16 @@
   <script src="js/game.js"></script>
 </body>
 </html>
+
+<script>
+  const url = "http://localhost:8080/api/game";
+fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ score:score })
+}).then(response => {
+    console.log(response.ok);
+}).catch(error => {
+    console.warn(error);
+});
+</script>

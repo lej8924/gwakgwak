@@ -5,8 +5,10 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  JoinTable
 } from "typeorm";
+import { ColumnMetadata } from "typeorm/metadata/ColumnMetadata";
 import {Comment} from './Comment';
 import {User} from "./User";
 
@@ -24,12 +26,21 @@ export class Board {
   @CreateDateColumn()
   created: Date;
 
+
   @UpdateDateColumn()
   updated: Date;
 
+ 
   @OneToMany(type => Comment, comment => comment.board)
   comments: Comment[];
+  
 
   @ManyToOne(type => User, user => user.boards)
-  user: User;
+  @JoinTable({
+    name: "user",
+    joinColumn: {name: "user_id", referencedColumnName: "user_id"},
+    inverseJoinColumn: {name: "id", referencedColumnName: "id"}
+  })
+  user:User;
+
 }

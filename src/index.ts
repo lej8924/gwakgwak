@@ -5,11 +5,13 @@ import {AuthMiddleware} from "./middleware/AuthMiddleware";
 import {readFile} from "fs";
 import {cors} from "cors";
 import jwt from 'jsonwebtoken';
+import cookieParser from "cookie-parser";
 
 let app = express();
 
 // body-parser는 내장되어있음.  json 파싱하기 위해서 설정만 추가
 app.use(express.json());
+app.use(cookieParser());
 
 // express에는 json 데이터를 파싱하는 모듈이 내장되어있다.
 // 하지만 json만 되고 x-www-form-urlencoded를 파싱하기 위해서 아래를 확장해야 한다.

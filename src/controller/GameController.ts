@@ -5,9 +5,10 @@ import {getConnection} from "typeorm";
 
 export class GameController{
     static addLog = async(req, res)=>{
-        const {score, user_id} = req.body;
+        const {score,userId} = req.body;
+        console.log("currnet game=>" +req.body.score);
 
-        const user = await getConnection().getRepository(User).findOne({id:user_id});
+        const user = await getConnection().getRepository(User).findOne({id:userId});
 
         const game_log = new Game_log();
         game_log.user = user;
@@ -18,11 +19,12 @@ export class GameController{
     }
 
     static findMyLogs = async (req,res)=>{
-        const id = req.params;
-        console.log({id});
+        const id = req.body.userId;
+        console.log("findmylogs=>"+id);
 
-        const game_log = await getConnection().getRepository(Game_log).find({relations: ['user'], where: {id}});
-
+        // const game_log = await getConnection().getRepository(Game_log).find({relations: ['user'], where: {id}});
+        const game_log = await getConnection().getRepository(Game_log).find();
+        console.log(game_log);
         // const game_log = await getConnection().getRepository(Game_log).find({
         //     relations :['user'],
         //     where: {
@@ -30,7 +32,7 @@ export class GameController{
         //     },
         // });
 
-        res.send(game_log);
+        res.render("game_log.ejs",{userId:id, logs : game_log});
     }
 
     // static findBestlog = async(req,res)=>{

@@ -5,22 +5,29 @@ import {User} from "../entity/User";
 
 export class BoardController {
   static addBoard = async (req, res) => {
-    const {title, content, user_id} = req.body;
+    const {title, content, userId} = req.body;
+    console.log(req.cookie);
 
-    const user = await getConnection().getRepository(User).findOne({id: user_id});
-    console.log(user);
+    const user = await getConnection().getRepository(User).findOne({id:userId});
+    // console.log(user);
+
+    // const nickname = await getConnection().getRepository(User).createQueryBuilder("nickname").where("id = :id", { id: userId }).getOne()
+    // console.log("nickname is=>"+nickname);
+
 
     const board = new Board();
     board.title = title;
     board.content = content;
     board.user = user;
-    const result = await getConnection().getRepository(Board).save(board);
+    // board.user_nickname = nickname;
+    await getConnection().getRepository(Board).save(board);
 
-    res.send(result);
+    res.redirect("http://localhost:8080/api/board");
   }
 
   static findAllBoard = async (req, res) => {
     const {page_number, page_size} = req.query;
+    console.log("board all=>"+req.query);
 
     const options = {};
     options['select'] = ["id", "title", "content", "created", "updated"];
@@ -39,11 +46,15 @@ export class BoardController {
   static findOneBoard = async (req, res) => {
     // 동적 파라메터가 정규표현식으로 변경이 되면 첫번째 파라메터를 가져와야 한다. ex: {'0': '1'}
     // const id = req.params[0];
-    const {id} = req.params;
+    console.log("되고 있나>");
+    const id = req.params.id;
+    console.log("get id=>  "+id);
 
-    const board = await getConnection().getRepository(Board).findOne({relations: ['user'], where: {id}});
-    res.send(board);
+    const board = await getConnection().getRepository(Board).findOne({where:{id}});
+    console.log("what board=>"+board);
+    res.render("edit.ejs",{model : board})
   }
+  
 
   static countBoard = async (req, res) => {
     const total = await getConnection().getRepository(Board).count();
@@ -51,6 +62,7 @@ export class BoardController {
   }
 
   static modifyBoard = async (req, res) => {
+    console.log(req.body);
     const {id, title, content} = req.body;
 
     const updateOption = {};

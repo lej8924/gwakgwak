@@ -2,7 +2,7 @@ import {Router} from "express";
 import {AuthController} from "../controller/AuthController";
 import { BoardController } from "../controller/BoardController";
 import { Board } from "../entity/Board";
-import jwt from 'jsonwebtoken';
+
 
 import {getConnection} from "typeorm";
 import {User} from "../entity/User";

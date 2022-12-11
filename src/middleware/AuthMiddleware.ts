@@ -1,17 +1,19 @@
 import {verify} from 'jsonwebtoken';
+import {decodeToken} from "./decodeToken";
 
 export class AuthMiddleware {
-  static verifyToken = async (req, res, next) => {
-
-    console.log("hihihihiidsfajso"+req);
-
-    if (!req.headers["authorization"] || !req.headers["authorization"].startsWith("Bearer ")) {
+  static verifyToken = async(req, res, next) => {
+    console.log("first==>"+req.cookies.authorization);
+    // const cookie = parseCookie(req.headers.cookie);
+    
+    if (!req.cookies.authorization || !req.cookies.authorization.startsWith("Bearer ")) {
       return res.status(401).send({
         message: "Unauthorized!"
       });
     }
 
-    const token = req.headers["authorization"].substring(7);
+    const token = req.cookies.authorization.substring(7);
+    console.log("this is my toked: " + token);
 
     verify(token, process.env.secret, (err, decoded) => {
       console.log(err);
@@ -20,13 +22,16 @@ export class AuthMiddleware {
           message: "Unauthorized!"
         });
       }
-      console.log(decoded);
-      req.userId = decoded.jti;
-      req.roles = decoded.roles;
-      console.log(req.userId);
+      else{console.log(decoded);}
+
+      
+      req.body.userId = decoded.jti;
+      req.body.roles = decoded.roles;
+      console.log(req.body.userId);
       next();
     });
   }
+  
 
   static hasRole = async (req, res, next) => {
     console.log(req.userId, req.roles);

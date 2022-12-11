@@ -25,14 +25,15 @@ export class AuthController {
 
     // // token 생성
     const token = jwt.sign({ jti: user.id, email: user.email, roles: user.roles.map(role => role.name) },
-      process.env.secret, {
+    process.env.secret, {
       subject: user.username,
       algorithm: 'HS512',
       expiresIn: process.env.expirationSecondMs
     });
 
-    res.cookie('token',token, {httpOnly:true});
-    res.redirect('http://localhost:8080/api/board/list');
+    res.cookie('authorization',("Bearer " +token), { httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
+    // res.setHeader('Authorization', 'Bearer ' + token);
+    res.redirect('http://localhost:8080/api/board');
   
     // res.send({token});
 
@@ -63,7 +64,7 @@ export class AuthController {
       .findOne({where: {email}});
 
     if (existUser) {
-      return res.status(400).send({ message: "User Not found." });
+      return res.write("<script>alert('User is already Exist')</script>").redirect('http://localhost:8080/api/auth/signup');
     }
 
     // roles 설정
@@ -83,9 +84,9 @@ export class AuthController {
       user.roles = res;
     }
 
-    const result = await getConnection().getRepository(User).save(user).then(result=> res.redirect("/api/auth/signup"));
+    const result = await getConnection().getRepository(User).save(user);
 
-    res.redirect('http://localhost:8080/api/board/list');
+    res.redirect('http://localhost:8080/api/board');
     
   }
 }

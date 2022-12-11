@@ -46,6 +46,11 @@ export class User {
   roles: Role[];
 
   @OneToMany(type => Board, board => board.user)
+  @JoinTable({
+    name: "board",
+    joinColumn: {name: "id", referencedColumnName: "id"},
+    inverseJoinColumn: {name: "user_id", referencedColumnName: "user_id"}
+  })
   boards: Board[];
 
   @OneToMany(type => Comment, comment => comment.user)

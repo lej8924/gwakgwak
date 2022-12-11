@@ -16,10 +16,10 @@
       <thead>
         <tr>
           <th>Title</th>
-          <th>Author</th>
+          <th>User</th>
           <th>Comment</th>
           <th class="d-print-none">
-            <a class="btn btn-sm btn-success" href="/create">Add</a>
+            <a class="btn btn-sm btn-success" href="/api/board/create">Add</a>
           </th>
         </tr>
       </thead>
@@ -27,11 +27,11 @@
         <% for (const board of model) { %>
           <tr>
             <td><%= board.title %></td>
+            <td><%= board.nickname %></td>
             <td><%= board.content %></td>
-            <td><%= board.created %></td>
             <td class="d-print-none">
-              <a class="btn btn-sm btn-warning" href="/edit/<%= board.id %>">Edit</a>
-              <a class="btn btn-sm btn-danger" href="/delete/<%= board.id %>">Delete</a>
+              <a class="btn btn-sm btn-warning" href="/api/board/edit/<%= board.id %>">Edit</a>
+              <a class="btn btn-sm btn-danger" href="/api/board/delete/<%= board.id %>">Delete</a>
             </td>
           </tr>
         <% } %>

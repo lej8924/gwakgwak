@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Whack A Mole!</title>
+  <link rel = "stylesheet" href="css/signin.css" type="text/css">
+  </head>
 <body>
+    <div id="con">
+    <div id="login">
+    <div id="login_form"><!--로그인 폼-->
+    <form action="/api/auth/signin" method="post">
+        <h3 class="login" style="letter-spacing:-1px;">Sign in to gwakgwak</h3>
+        <hr>
+        <label>
+        <!-- <span>ID</span> -->
+        <p style="text-align: left; font-size:12px; color:#666">Username</p>
+        <input type="text" placeholder="email" class="size" name="email">
+        <!-- <input type="submit" value="확인"> -->
+        <p></p>
+        </label>
 
-<h3>로그인</h3>
-<form action="/api/auth/signin" method="post">
-    <table>
-        <tr>
-            <td>이메일 : </td>
-            <td><input type="text" name="email"></td>
-        </tr>
-        <tr>
-            <td>비번 : </td>
-            <td><input type="password" name="password"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="로그인"></td>
-        </tr>
-    </table>
-</form>
+        <label>
+        <!-- <span>PW</span> -->
+        <p style="text-align: left; font-size:12px; color:#666">Password </p>
+        <input type="text" placeholder="password" class="size" name="password">
+        <!-- <input type="submit" value="확인"> -->
+        </label>
+
+        <p>
+            <input type="submit" value="Sign in" class="btn">
+        </p>
+    </form>
+    <hr>
+    <p class="find">
+        <span><a href="signup.ejs" >회원가입</a></span>
+    </p>
+    </div>
+    <div>
+    </div><!--con-->
+
 </body>
 </html>
