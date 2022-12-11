@@ -3,7 +3,8 @@ import {createConnection} from "typeorm";
 import router from './router';
 import {AuthMiddleware} from "./middleware/AuthMiddleware";
 import {readFile} from "fs";
-
+import {cors} from "cors";
+import jwt from 'jsonwebtoken';
 
 let app = express();
 
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }))
+
+// app.use(cors({exposedHeaders: ['Authorization'],}),);
 
 app.use("/api",express.static(__dirname + '/public'));
 // app.use("",express.static(__dirname + '/public'));
@@ -32,6 +35,7 @@ app.get('/header', (req, res) => {
 
 
 app.use('/api', router);
+
 
 
 createConnection().then(connection => {

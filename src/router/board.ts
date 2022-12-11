@@ -7,8 +7,9 @@ routes.get('',function(req,res,next){
     res.render("board.ejs");
 })
 
-routes.post('', AuthMiddleware.verifyToken, BoardController.addBoard);
-routes.get('/list',  BoardController.findAllBoard);
+// routes.post('', AuthMiddleware.verifyToken, BoardController.addBoard);
+routes.post('', BoardController.addBoard);
+routes.get('/list',  BoardController.findAllBoard );
 routes.get('/count', BoardController.countBoard);
 // routes.get(/^\/(\d+)$/, BoardController.findOneBoard);
 routes.get('/:id', BoardController.findOneBoard);

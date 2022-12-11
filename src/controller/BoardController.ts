@@ -33,7 +33,7 @@ export class BoardController {
     }
 
     const boards = await getConnection().getRepository(Board).find(options);
-    res.send(boards);
+    res.render("board.ejs",{model : boards});
   }
 
   static findOneBoard = async (req, res) => {

@@ -3,6 +3,8 @@ import {verify} from 'jsonwebtoken';
 export class AuthMiddleware {
   static verifyToken = async (req, res, next) => {
 
+    console.log("hihihihiidsfajso"+req);
+
     if (!req.headers["authorization"] || !req.headers["authorization"].startsWith("Bearer ")) {
       return res.status(401).send({
         message: "Unauthorized!"
@@ -21,6 +23,7 @@ export class AuthMiddleware {
       console.log(decoded);
       req.userId = decoded.jti;
       req.roles = decoded.roles;
+      console.log(req.userId);
       next();
     });
   }

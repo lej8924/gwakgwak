@@ -4,6 +4,8 @@ import {User} from "../entity/User";
 import {hashSync, compareSync} from 'bcryptjs';
 import {Role} from "../entity/Role";
 import jwt from 'jsonwebtoken';
+import fetch from 'node-fetch';
+import axios from "axios";
 
 export class AuthController {
   static signIn = async (req, res, next) => {
@@ -19,8 +21,9 @@ export class AuthController {
     if (!compareSync(password, user.password)) {
       return res.status(400).send({ message: "Invalid password" });
     }
+  
 
-    // token 생성
+    // // token 생성
     const token = jwt.sign({ jti: user.id, email: user.email, roles: user.roles.map(role => role.name) },
       process.env.secret, {
       subject: user.username,
@@ -28,7 +31,22 @@ export class AuthController {
       expiresIn: process.env.expirationSecondMs
     });
 
-    res.redirect("/",token);
+    res.cookie('token',token, {httpOnly:true});
+    res.redirect('http://localhost:8080/api/board/list');
+  
+    // res.send({token});
+
+    // const headers = {'Authorization': ('Bearer '+ token)};
+
+    // axios.post('http://localhost:8080/api/board',{headers}).then(res=>(console.log(headers)));
+    
+
+    // res.redirect('http://localhost:8080/api/board');
+    // res.send({jwt: token});
+    // res.redirect(307, `http://localhost:8080/?key=value#token=${token}`)
+
+    // res.setHeader('Authorization', ("Bearer " + token ));
+    // res.redirect('http://localhost:8080/api/board');
   }
 
   static signUp = async (req, res, next) => {
@@ -67,7 +85,7 @@ export class AuthController {
 
     const result = await getConnection().getRepository(User).save(user).then(result=> res.redirect("/api/auth/signup"));
 
-    res.send(result);
+    res.redirect('http://localhost:8080/api/board/list');
     
   }
 }

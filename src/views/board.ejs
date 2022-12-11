@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Whack A Mole!</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+  <link rel = "stylesheet" href="css/game.css" type="text/css">
+  <link rel = "stylesheet" href="css/main.css" type="text/css">
+</head>
+<body>
+  
+  <%-include('header.ejs') %>  
+  <div class="table-responsive-sm">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Comment</th>
+          <th class="d-print-none">
+            <a class="btn btn-sm btn-success" href="/create">Add</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (const board of model) { %>
+          <tr>
+            <td><%= board.title %></td>
+            <td><%= board.content %></td>
+            <td><%= board.created %></td>
+            <td class="d-print-none">
+              <a class="btn btn-sm btn-warning" href="/edit/<%= board.id %>">Edit</a>
+              <a class="btn btn-sm btn-danger" href="/delete/<%= board.id %>">Delete</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+
+</body>
+</html>
+<!-- <script>
+  const myprecious = document.getElementById("test").value;
+
+  var client = new XMLHttpRequest();
+  client.open('GET', '/api/board');
+  client.setRequestHeader('Authorization', myprecious);
+  client.send();
+
+
+</script> -->
