@@ -40,7 +40,7 @@ const holes = document.querySelectorAll('.hole');
     peep();
  
 
-    setTimeout(function(){timeUp = true;  fetch("http://localhost:8080/api/game", {
+    setTimeout(function(){timeUp = true;  fetch("/api/game", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ score:scoreBoard.textContent })

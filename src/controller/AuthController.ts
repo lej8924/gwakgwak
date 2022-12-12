@@ -33,7 +33,7 @@ export class AuthController {
 
     res.cookie('authorization',("Bearer " +token), { httpOnly: true, maxAge: 24 * 60 * 60 * 1000});
     // res.setHeader('Authorization', 'Bearer ' + token);
-    res.redirect('http://localhost:8080/api/board');
+    res.redirect('/api/board');
   
     // res.send({token});
 
@@ -64,7 +64,7 @@ export class AuthController {
       .findOne({where: {email}});
 
     if (existUser) {
-      return res.write("<script>alert('User is already Exist')</script>").redirect('http://localhost:8080/api/auth/signup');
+      return res.write("<script>alert('User is already Exist')</script>").redirect('/api/auth/signup');
     }
 
     // roles 설정
@@ -86,7 +86,7 @@ export class AuthController {
 
     const result = await getConnection().getRepository(User).save(user);
 
-    res.redirect('http://localhost:8080/api/board');
+    res.redirect('/api/auth/signin');
     
   }
 }

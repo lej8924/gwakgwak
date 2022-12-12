@@ -40,18 +40,29 @@ export class BoardController {
     }
 
     const boards = await getConnection().getRepository(Board).find(options);
+    // console.log(boards);
     res.render("board.ejs",{model : boards});
   }
 
   static findOneBoard = async (req, res) => {
     // 동적 파라메터가 정규표현식으로 변경이 되면 첫번째 파라메터를 가져와야 한다. ex: {'0': '1'}
     // const id = req.params[0];
-    console.log("되고 있나>");
     const id = req.params.id;
     console.log("get id=>  "+id);
 
-    const board = await getConnection().getRepository(Board).findOne({where:{id}});
-    console.log("what board=>"+board);
+
+    
+    const options = {};
+    options['select'] = ["id", "title", "content", "created", "updated"];
+    options['order'] = {id: 'DESC'};
+    options['relations'] = ['user']
+    
+    
+    const board = await getConnection().getRepository(Board).createQueryBuilder("board")
+    .where("board.id = :id", { id: id })
+    .getOne()
+  
+    console.log("findOneBoard=>"+board);
     res.render("edit.ejs",{model : board})
   }
   
@@ -62,7 +73,7 @@ export class BoardController {
   }
 
   static modifyBoard = async (req, res) => {
-    console.log(req.body);
+    console.log("modifyboard=>"+req.body);
     const {id, title, content} = req.body;
 
     const updateOption = {};
@@ -78,7 +89,7 @@ export class BoardController {
       .where("id = :id", {id})
       .execute();
 
-    res.send(result);
+    res.redirect("http://localhost:8080/api/board");
   }
 
   static removeBoard = async (req, res) => {
@@ -91,6 +102,6 @@ export class BoardController {
       .where("id = :id", {id})
       .execute();
 
-    res.send(result);
+    res.redirect("http://localhost:8080/api/board");
   }
 }

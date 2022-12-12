@@ -1,3 +1,4 @@
+
 import express from 'express';
 import {createConnection} from "typeorm";
 import router from './router';
@@ -21,7 +22,7 @@ app.use(express.urlencoded({
 
 // app.use(cors({exposedHeaders: ['Authorization'],}),);
 
-app.use("/api",express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 // app.use("",express.static(__dirname + '/public'));
 // app.engine('html', require('ejs').renderFile)
 app.set('views', __dirname + '/views');

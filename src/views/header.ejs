@@ -1,4 +1,4 @@
-<link rel = "stylesheet" href="css/header.css" type="text/css">
+<link rel = "stylesheet" href="/css/header.css" type="text/css">
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
@@ -14,13 +14,13 @@
 			<div class="container">
 				<div class="row">
 					<div class="col d-flex flex-row">
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918577/phone.png" alt=""></div>+91 9823 132 111</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">contact@bbbootstrap.com</a></div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918577/phone.png" alt=""></div>+82 02 920 0000</div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918597/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">gwakgwak@seoultech.ac.kr</a></div>
 						<div class="top_bar_contact_item ml-auto">
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
-								<div><a href="#" onclick="gosignup()">Register</a></div>
-								<div><a href="#" onclick="gosignin()">Sign in</a></div>
+								<div><a href="/api/auth/signup">Register</a></div>
+								<div><a href="/api/auth/signin" >Sign in</a></div>
 							</div>
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#">gwakgwak</a></div>
+							<div class="logo"><a href="board">gwakgwak</a></div>
 						</div>
 					</div>
 				</div>
@@ -98,7 +98,7 @@
 
 	</header>
 </div>
-<script src="js/header.js"></script>
+<script src="/js/header.js"></script>
 <script>
 	function gosignin(){
 		document.location.href = "http://localhost:8080/api/auth/signin"
