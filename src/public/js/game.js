@@ -70,20 +70,4 @@ const holes = document.querySelectorAll('.hole');
 
   moles.forEach(mole => mole.addEventListener('click', bonk));
 
-  function sendPost(url, params) {
-    var form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('target', '_blank');
-    form.setAttribute('action', url);
-
-    for (var key in params) {
-      var hiddenField = document.createElement('input');
-      hiddenField.setAttribute('type', 'hidden');
-      hiddenField.setAttribute('name', key);
-      hiddenField.setAttribute('value', params[key]);
-      form.appendChild(hiddenField);
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-  }
+ 
